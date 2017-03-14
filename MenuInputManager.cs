@@ -11,19 +11,19 @@ public class MenuInputManager : MonoBehaviour
     public GameObject playerPrefab;
     public Sprite emptySprite;
     public Sprite padSprite;
-    bool playerIndexSet = false;
-    int ColorMax = 7;
-    GamePadState state;
-    GamePadState prevState;
     public GamePadState[] previousStates;
     public List<PlayerIndex> indexList = new List<PlayerIndex>();
     public Image[] sliderList;
     public Color32[] playerColorList;
     public bool[] isPlaying;
+    private bool playerIndexSet = false;
+    private int ColorMax = 7;
+    private GamePadState state;
+    private GamePadState prevState;
     private Color32[] colorPickerList;
     private int[] colorIndexSelected;
 
-    void Start()
+    void Initialise()
     {
         previousStates = new GamePadState[] { GamePad.GetState(0), GamePad.GetState(0), GamePad.GetState(0), GamePad.GetState(0), GamePad.GetState(0), GamePad.GetState(0) };
         colorPickerList = new Color32[] { new Color32(125, 239, 31, 255), new Color32(255, 171, 53, 255), new Color32(55, 232, 158, 255), new Color32(45, 237, 255, 255), new Color32(211, 117, 255, 255), new Color32(255, 117, 236, 255), new Color32(255, 30, 64, 255), new Color32(255, 255, 0, 255) };
@@ -42,6 +42,11 @@ public class MenuInputManager : MonoBehaviour
                 indexList.Add(testPlayerIndex);
             }
         }
+    }
+    
+    void Start()
+    {
+        Initialise();
     }
 
     void Update()
@@ -95,7 +100,6 @@ public class MenuInputManager : MonoBehaviour
             {
                 sliderList[i].color = Color.white;
             }
-
             previousStates[i] = state; // Update the previous state to the current state at the end
         }
 
@@ -148,27 +152,7 @@ public class MenuInputManager : MonoBehaviour
         }
 
     }
-    
- /*
-
-    // Detect if a button was pressed this frame
-    if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
-    {
-        GetComponent<Renderer>().material.color = new Color(Random.value, Random.value, Random.value, 1.0f);
-    }
-    // Detect if a button was released this frame
-    if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Released)
-    {
-        GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-    }
-
-    // Set vibration according to triggers
-    GamePad.SetVibration(playerIndex, state.Triggers.Left, state.Triggers.Right);
-
-    // Make the current object turn
-    transform.localRotation *= Quaternion.Euler(0.0f, state.ThumbSticks.Left.X * 25.0f * Time.deltaTime, 0.0f);
-}
-*/
+   
     public void SetPlayersActive()
     {
         List<PlayerIndex> playerPlaying = new List<PlayerIndex>();
@@ -187,18 +171,17 @@ public class MenuInputManager : MonoBehaviour
         GlobalScript.playerPlayingColor = playerPlayingColor;
     }
 
-    //void OnGUI()
-    //{
-    //    string text = "Use left stick to turn the cube, hold A to change color\n";
-    //    text += string.Format("IsConnected {0} Packet #{1}\n", state.IsConnected, state.PacketNumber);
-    //    text += string.Format("\tTriggers {0} {1}\n", state.Triggers.Left, state.Triggers.Right);
-    //    text += string.Format("\tD-Pad {0} {1} {2} {3}\n", state.DPad.Up, state.DPad.Right, state.DPad.Down, state.DPad.Left);
-    //    text += string.Format("\tButtons Start {0} Back {1} Guide {2}\n", state.Buttons.Start, state.Buttons.Back, state.Buttons.Guide);
-    //    text += string.Format("\tButtons LeftStick {0} RightStick {1} LeftShoulder {2} RightShoulder {3}\n", state.Buttons.LeftStick, state.Buttons.RightStick, state.Buttons.LeftShoulder, state.Buttons.RightShoulder);
-    //    text += string.Format("\tButtons A {0} B {1} X {2} Y {3}\n", state.Buttons.A, state.Buttons.B, state.Buttons.X, state.Buttons.Y);
-    //    text += string.Format("\tSticks Left {0} {1} Right {2} {3}\n", state.ThumbSticks.Left.X, state.ThumbSticks.Left.Y, state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
-    //    GUI.Label(new Rect(0, 0, Screen.width, Screen.height), text);
-    //}
-    
-    
+    //Debug Commands
+    void OnGUI()
+    {
+        string text = "Use left stick to turn the cube, hold A to change color\n";
+        text += string.Format("IsConnected {0} Packet #{1}\n", state.IsConnected, state.PacketNumber);
+        text += string.Format("\tTriggers {0} {1}\n", state.Triggers.Left, state.Triggers.Right);
+        text += string.Format("\tD-Pad {0} {1} {2} {3}\n", state.DPad.Up, state.DPad.Right, state.DPad.Down, state.DPad.Left);
+        text += string.Format("\tButtons Start {0} Back {1} Guide {2}\n", state.Buttons.Start, state.Buttons.Back, state.Buttons.Guide);
+        text += string.Format("\tButtons LeftStick {0} RightStick {1} LeftShoulder {2} RightShoulder {3}\n", state.Buttons.LeftStick, state.Buttons.RightStick, state.Buttons.LeftShoulder, state.Buttons.RightShoulder);
+        text += string.Format("\tButtons A {0} B {1} X {2} Y {3}\n", state.Buttons.A, state.Buttons.B, state.Buttons.X, state.Buttons.Y);
+        text += string.Format("\tSticks Left {0} {1} Right {2} {3}\n", state.ThumbSticks.Left.X, state.ThumbSticks.Left.Y, state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
+        GUI.Label(new Rect(0, 0, Screen.width, Screen.height), text);
+    }   
 }
