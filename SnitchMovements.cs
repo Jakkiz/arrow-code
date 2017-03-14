@@ -5,8 +5,8 @@ public class SnitchMovements : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
     private Vector3 dir;
-    private float speed = 1500f; // the speed at which the snitch dodges obstacle
-    private float secSpeed = 1500f; // the speed at which the snitch moves 
+    private float speed = 1500f; 
+    private float secSpeed = 1500f; 
     private RaycastHit2D upHit;
     private RaycastHit2D fHit;
     private RaycastHit2D lHit;
