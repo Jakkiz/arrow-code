@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public GamePadState state;
     public GamePadState prevState;
-    Rigidbody2D rigidBody;
+    private Rigidbody2D rigidBody;
     public GameObject rollParticle;
     public GameObject deathParticle;
     public GameObject poweredUpEffect;
@@ -17,18 +17,18 @@ public class PlayerController : MonoBehaviour
     private CameraShakeController cameraShake;
     public const float StandardSpeed = 73f;
     public const float ChargingSpeed = 35f;
-    float speed;
-    float speedRotation = 12f;
-    float moveHor;
-    float moveVert;
-    float aimHor;
-    float aimVert;
-    float angle;
-    int powerArrowCount = 0;
+    private float speed;
+    private float speedRotation = 12f;
+    private float moveHor;
+    private float moveVert;
+    private float aimHor;
+    private float aimVert;
+    private float angle;
+    private int powerArrowCount = 0;
     public bool canMove = true;
     public bool canRoll = true;
     public bool isRolling = false;
-    Vector3 aimDir = new Vector3();
+    private Vector3 aimDir = new Vector3();
     public Vector3 dir = new Vector3();
     public int numberController;
     public Color32 color;           //color of the player
@@ -37,15 +37,15 @@ public class PlayerController : MonoBehaviour
     public bool isStunned = false;
     public bool isPoweredUp;
     public bool hasGravityArrow;
-    bool canAim = true;
-    float timer = 0f;
-    float resTimer = 0f;
-    float stunTimer = 0f;
-    float pushTimer = 0f;
-    float powerUpTimer = 0f;
-    float tempTimer = 0f;
-    GameObject dodgeParticle;
-    GameObject[] powerUpParticleList;
+    private bool canAim = true;
+    private float timer = 0f;
+    private float resTimer = 0f;
+    private float stunTimer = 0f;
+    private float pushTimer = 0f;
+    private float powerUpTimer = 0f;
+    private float tempTimer = 0f;
+    private GameObject dodgeParticle;
+    private GameObject[] powerUpParticleList;
     private GameObject gravityArrow = null;
     public int score;
 
@@ -382,18 +382,4 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Log from player " + numberController);
     }
-
-
-    //void OnGUI()
-    //{
-    //    string text = "Use left stick to turn the cube, hold A to change color\n";
-    //    text += string.Format("IsConnected {0} Packet #{1}\n", state.IsConnected, state.PacketNumber);
-    //    text += string.Format("\tTriggers {0} {1}\n", state.Triggers.Left, state.Triggers.Right);
-    //    text += string.Format("\tD-Pad {0} {1} {2} {3}\n", state.DPad.Up, state.DPad.Right, state.DPad.Down, state.DPad.Left);
-    //    text += string.Format("\tButtons Start {0} Back {1} Guide {2}\n", state.Buttons.Start, state.Buttons.Back, state.Buttons.Guide);
-    //    text += string.Format("\tButtons LeftStick {0} RightStick {1} LeftShoulder {2} RightShoulder {3}\n", state.Buttons.LeftStick, state.Buttons.RightStick, state.Buttons.LeftShoulder, state.Buttons.RightShoulder);
-    //    text += string.Format("\tButtons A {0} B {1} X {2} Y {3}\n", state.Buttons.A, state.Buttons.B, state.Buttons.X, state.Buttons.Y);
-    //    text += string.Format("\tSticks Left {0} {1} Right {2} {3}\n", state.ThumbSticks.Left.X, state.ThumbSticks.Left.Y, state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
-    //    GUI.Label(new Rect(0, 0, Screen.width, Screen.height), text);
-    //}
 }
