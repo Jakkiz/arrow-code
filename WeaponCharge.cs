@@ -13,26 +13,21 @@ public class WeaponCharge : MonoBehaviour
     public const float WeaponChargeMaxValue = 3f;
     public float weaponChargeValue;
     private bool changeSpeed = false; // Delete
-    bool hasArrow = false;
-    bool isRolling = false;
+    private bool hasArrow = false;
+    private bool isRolling = false;
     public bool isCharging;
-    int numberController = 1;
-    Color32 colorSlider;
+    private int numberController = 1;
+    private Color32 colorSlider;
+    private float timerWeapon3rdCharge = 0;
+    private float timeYouCanHoldArrow = 2f;
 
-    float timerWeapon3rdCharge = 0;
-    float timeYouCanHoldArrow = 2f;
-    // Use this for initialization
     void Start()
     {
         fireScript = GetComponent<Fire>();
-       
-
     }
 
-    // Update is called once per frame
     void FixedUpdate()
-    {
-        
+    {        
         if(!GetComponentInParent<PlayerController>().isDead && !GetComponentInParent<PlayerController>().isPoweredUp)
         {
             isRolling = GetComponentInParent<PlayerController>().isRolling;
@@ -49,7 +44,6 @@ public class WeaponCharge : MonoBehaviour
                     {
                         player.GetComponent<PlayerController>().SetNormalSpeed();
                         isCharging = false;
-                        //animator.GetComponent<AnimController>().ResetWeaponChargeTimer();
                         myArrow = fireScript.DoFire(weaponChargeValue);
                         timerWeapon3rdCharge = 0;
                         //Resets everything else 
@@ -63,16 +57,14 @@ public class WeaponCharge : MonoBehaviour
                 if (isCharging && myArrow == null)
                 {
                     changeSpeed = false;
-                    //Changes speed of player back to normal
                     player.GetComponent<PlayerController>().SetNormalSpeed();
                     isCharging = false;
-                    //animator.GetComponent<AnimController>().ResetWeaponChargeTimer();
-                    //Fires the arrow
+
                     if (weaponChargeValue >= 1)
                     {
                         myArrow = fireScript.DoFire(weaponChargeValue);
                     }
-                    //Resets everything else 
+
                     weaponChargeValue = 0;
                     UpdateSlider();
                 }
@@ -128,10 +120,5 @@ public class WeaponCharge : MonoBehaviour
         }
         colorSlider.a = 50;
         weaponSliderFill.color = colorSlider;
-    }
-
-    void OnGUI()
-    {
-        // GUILayout.Label("trigger:" + weaponChargeValue);
     }
 }
